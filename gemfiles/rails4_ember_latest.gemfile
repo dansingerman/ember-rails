@@ -2,6 +2,7 @@
 
 source "https://rubygems.org"
 
+gem "barber", :github => "tricknotes/barber", :branch => "htmlbars"
 gem "rails", "~> 4.0.0"
 gem "ember-source", "~> 1.10.0.beta.2"
 gem "handlebars-source"
