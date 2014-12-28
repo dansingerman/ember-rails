@@ -102,26 +102,26 @@ class HjsTemplateTest < IntegrationTest
       template = Ember::Handlebars::Template.new template_path.to_s
       asset = app.assets.attributes_for(template_path)
 
-      assert_match /define\('appkit\/templates\/test', \['exports'\], function\(__exports__\)\{ __exports__\['default'\] = Ember\.Handlebars\.template\(/m, template.render(asset)
+      assert_match /define\('appkit\/templates\/test', \['exports'\], function\(__exports__\)\{ __exports__\['default'\] = Ember\.(?:Handlebars|HTMLBars)\.template\(/m, template.render(asset)
     end
   end
 
   test "asset pipeline should serve template" do
     get "/assets/templates/test.js"
     assert_response :success
-    assert_match /Ember\.TEMPLATES\["test"\] = Ember\.Handlebars\.template\(/m, @response.body
+    assert_match /Ember\.TEMPLATES\["test"\] = Ember\.(?:Handlebars|HTMLBars)\.template\(/m, @response.body
   end
 
   test "asset pipeline should serve bundled application.js" do
     get "/assets/application.js"
     assert_response :success
-    assert_match /Ember\.TEMPLATES\["test"\] = Ember\.Handlebars\.template\(/m, @response.body
+    assert_match /Ember\.TEMPLATES\["test"\] = Ember\.(?:Handlebars|HTMLBars)\.template\(/m, @response.body
   end
 
   test "should unbind mustache templates" do
     get "/assets/templates/hairy.mustache"
     assert_response :success
-    assert_match /Ember\.TEMPLATES\["hairy(\.mustache)?"\] = Ember\.Handlebars\.template\(/m, @response.body
+    assert_match /Ember\.TEMPLATES\["hairy(\.mustache)?"\] = Ember\.(?:Handlebars|HTMLBars)\.template\(/m, @response.body
     assert_match /function .*unbound|"name":"unbound"/m, @response.body
   end
 
